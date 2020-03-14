@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/drinks', 'DrinkController@index');
+Route::get('/drinks/{id}', 'DrinkController@show');
+Route::post('/drinks/', 'DrinkController@store');
+Route::put('/drinks/{id}', 'DrinkController@store');
+Route::delete('/drinks/{id}', 'DrinkController@destroy');
+
