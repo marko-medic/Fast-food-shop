@@ -12,7 +12,7 @@
                     @csrf
                         <input class="form-control" type="text" placeholder="Food name" name="name">
                         <input class="form-control" type="number" placeholder="Food price($)" name="price">
-                        <textarea class='form-control' name="description" id="" cols="30" rows="5" placeholder="Food description"></textarea>
+                        <textarea id="summary-ckeditor" class='form-control' name="description" id="" cols="30" rows="5" placeholder="Food description"></textarea>
                         <fieldset class='mt-2'>
                         <label>Extra toppings:</label> <br/>
                         <input type="checkbox" name="topping[]" value="Ketchup">Ketchup<br/>

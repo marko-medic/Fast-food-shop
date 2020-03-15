@@ -27,6 +27,7 @@
                         @endauth
                     <hr>
                    @endforeach
+                   {{$foodList->links()}}
                 @endif
 
                 </div>

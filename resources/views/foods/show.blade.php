@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <p><strong>Food name: </strong> {{$food->name}}</p>
                     <p><strong>Food price: </strong>${{$food->price}}</p>
-                    <p><strong>Food Description: </strong>{{$food->description}}</p>
+                    <p><strong>Food Description: </strong>{!!$food->description!!}</p>
                     @if (!empty($food->toppings))
                     <p><strong>Toppings:</strong></p>
                     <ul>

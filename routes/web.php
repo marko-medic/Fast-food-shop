@@ -13,13 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PageController@index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'PageController@home')->name('home')->middleware('auth');
 Route::get('/foods', 'FoodController@index')->name('foods.index');
 Route::get('/foods/create', 'FoodController@create')->name('foods.create')->middleware("auth");
 Route::post('/foods', 'FoodController@store')->middleware("auth");
