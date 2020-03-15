@@ -15,6 +15,10 @@
                     @else
                     <li class="nav-item">
 
+                        <a class="nav-link" href="{{ Route('dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+                    <li class="nav-item">
+
                         <a class="nav-link" href="{{ route('foods.create') }}">{{ __('Add new food') }}</a>
                             </li>
                     @endguest

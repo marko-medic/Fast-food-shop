@@ -14,7 +14,14 @@
                         <input class="form-control" type="text" placeholder="Food name" name="name" value="{{$food->name}}">
                         <input class="form-control" type="number" placeholder="Food price($)" name="price" value="{{$food->price}}">
                         <textarea id='summary-ckeditor' class='form-control' name="description" id="" cols="30" rows="5" placeholder="Food description">{{$food->description}}</textarea>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <fieldset class='mt-2'>
+                            <label>Extra toppings:</label> <br/>
+                            <input type="checkbox" name="toppings[]" value="Ketchup" {{in_array('Ketchup', $food->toppings) ? 'checked' : ''}}>Ketchup<br/>
+                            <input type="checkbox" name="toppings[]" value="Eggs" {{in_array('Eggs', $food->toppings) ? 'checked' : ''}}>Eggs<br/>
+                            <input type="checkbox" name="toppings[]" value="Salad" {{in_array('Salad', $food->toppings) ? 'checked' : ''}}>Salad<br/>
+                            <input type="checkbox" name="toppings[]" value="Cheese" {{in_array('Cheese', $food->toppings) ? 'checked' : ''}}>Cheese<br/>
+                        </fieldset>
+                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>
             </div>

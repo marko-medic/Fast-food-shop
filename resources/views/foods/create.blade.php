@@ -15,13 +15,13 @@
                         <textarea id="summary-ckeditor" class='form-control' name="description" id="" cols="30" rows="5" placeholder="Food description"></textarea>
                         <fieldset class='mt-2'>
                         <label>Extra toppings:</label> <br/>
-                        <input type="checkbox" name="topping[]" value="Ketchup">Ketchup<br/>
-                        <input type="checkbox" name="topping[]" value="Eggs">Eggs<br/>
-                        <input type="checkbox" name="topping[]" value="Salad">Salad<br/>
-                        <input type="checkbox" name="topping[]" value="Cheese">Cheese<br/>
+                        <input type="checkbox" name="toppings[]" value="Ketchup">Ketchup<br/>
+                        <input type="checkbox" name="toppings[]" value="Eggs">Eggs<br/>
+                        <input type="checkbox" name="toppings[]" value="Salad">Salad<br/>
+                        <input type="checkbox" name="toppings[]" value="Cheese">Cheese<br/>
                         
                         </fieldset>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>
             </div>

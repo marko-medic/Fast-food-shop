@@ -14,10 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PageController@index');
-
 Auth::routes();
 
-Route::get('/home', 'PageController@home')->name('home')->middleware('auth');
+Route::get('/dashboard', 'PageController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/foods', 'FoodController@index')->name('foods.index');
 Route::get('/foods/create', 'FoodController@create')->name('foods.create')->middleware("auth");
 Route::post('/foods', 'FoodController@store')->middleware("auth");

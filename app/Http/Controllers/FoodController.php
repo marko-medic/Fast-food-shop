@@ -8,7 +8,7 @@ use App\Food;
 class FoodController extends Controller
 {
     public function index() {
-        $foodList = Food::paginate(15);
+        $foodList = Food::orderBy("created_at", "desc")->paginate(15);
         return view("foods.index", ["foodList" => $foodList]);
     }
 
@@ -21,35 +21,49 @@ class FoodController extends Controller
         return view("foods.create");
     }
 
-    public function store() {
+    public function store(Request $request) {
+        $this->validate($request, [
+            "name" => "required",
+            "price" => "required",
+            "description" => "required"
+        ]);
         $food = new Food();
         $food->name = request("name");
         $food->price = request("price");
         $food->description = request("description");
-        $food->toppings = request("topping");
+        $food->toppings = request("toppings") ?? [];
+        $food->user_id = Auth()->user()->id;
         $food->save();
-        return redirect("/foods")->with("message", "Food created!");
+        return redirect(Route("foods.index"))->with("success", "Food created!");
     }
 
     public function edit($id) {
         $food = Food::findOrFail($id);
+        $food->toppings = $food->toppings ?? [];
         return view("foods.edit", ["food" => $food]);
     }
 
-    public function update($id) {
+    public function update(Request $request, $id) {
+
+        $this->validate($request, [
+            "name" => "required",
+            "price" => "required",
+            "description" => "required"
+        ]);
         $food = Food::findOrFail($id);
         $food->name = request("name");
         $food->price = request("price");
         $food->description = request("description");
+        $food->toppings = request("toppings") ?? [];
         $food->save();
-        return redirect("/foods")->with("message", "Food updated!");
+        return redirect(Route("foods.index"))->with("success", "Food updated!");
     }
 
     public function destroy($id) {
         $food = Food::findOrFail($id);
         // staviti if svuda!
         $food->delete();
-        return redirect("/foods")->with("message", "Food: " . $food->name . " deleted succcessfully!");
+        return redirect(Route("foods.index"))->with("success", "Food: " . $food->name . " deleted succcessfully!");
     }
 
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddToppingsToFoodsTable extends Migration
+class AddUserIdToFoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddToppingsToFoodsTable extends Migration
     public function up()
     {
         Schema::table('foods', function (Blueprint $table) {
-            $table->json("toppings");
+            $table->integer("user_id");
         });
     }
 
@@ -26,7 +26,7 @@ class AddToppingsToFoodsTable extends Migration
     public function down()
     {
         Schema::table('foods', function (Blueprint $table) {
-            $table->dropColumn('toppings');
+            $table->dropColumn('user_id');
         });
     }
 }

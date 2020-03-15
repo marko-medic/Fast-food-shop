@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class PageController extends Controller
 {
@@ -10,7 +11,9 @@ class PageController extends Controller
         return view("pages.welcome");
     }
 
-    public function home() {
-        return view("pages.home");
+    public function dashboard() {
+        $userId = Auth()->user()->id;
+        $user = User::find($userId);
+        return view("pages.dashboard", ["userFoods" => $user->foods]);
     }
 }

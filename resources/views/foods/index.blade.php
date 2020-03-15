@@ -10,11 +10,11 @@
                 <div class="card-body">
                 @if(!count($foodList)) 
                     <h3>There are no available food yet!</h3>
-                    @else
+                @else
                    @foreach($foodList as $food)
                     <p><strong>Food name: </strong><a href="{{Route('foods.show', $food->id)}}">{{$food->name}}</a></p>
                     <p><strong>Food price: </strong>${{$food->price}}</p>
-                        @auth
+                     @auth
                     <div class="actions">
                         <a class="btn btn-secondary" href="{{Route('foods.edit', $food->id)}}">EDIT</a>
                         <span class="m-2">|</span>
@@ -29,9 +29,7 @@
                    @endforeach
                    {{$foodList->links()}}
                 @endif
-
                 </div>
-                <strong class='text-secondary m-2'>{{session('message')}}</strong>
             </div>
         </div>
     </div>

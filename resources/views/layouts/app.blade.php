@@ -22,10 +22,12 @@
 <body>
     <div id="app">
         @include('inc.navbar')
-
+        <div class="container m-3">
+            @include('inc.messages')
         <main class="py-4">
             @yield('content')
         </main>
+        </div>
     </div>
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <script>
