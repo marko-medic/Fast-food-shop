@@ -8,7 +8,7 @@
                 <div class="card-header">Create new food</div>
 
                 <div class="card-body">
-                    <form action="/foods" method="POST">
+                    <form action="/foods" method="POST" enctype="multipart/form-data">
                     @csrf
                         <input class="form-control" type="text" placeholder="Food name" name="name">
                         <input class="form-control" type="number" placeholder="Food price($)" name="price">
@@ -19,8 +19,8 @@
                         <input type="checkbox" name="toppings[]" value="Eggs">Eggs<br/>
                         <input type="checkbox" name="toppings[]" value="Salad">Salad<br/>
                         <input type="checkbox" name="toppings[]" value="Cheese">Cheese<br/>
-                        
                         </fieldset>
+                        <input type="file" name="featured_image">
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>

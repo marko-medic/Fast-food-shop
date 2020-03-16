@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Food;
+use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
@@ -25,14 +26,28 @@ class FoodController extends Controller
         $this->validate($request, [
             "name" => "required",
             "price" => "required",
-            "description" => "required"
+            "description" => "required",
+            "featured_image" => "image|nullable|max:1999"
         ]);
+
+        $featured_image = 'featured_image';
+        if ($request->hasFile($featured_image)) {
+            $filenameWithExt = $request->file($featured_image)->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file($featured_image)->getClientOriginalExtension();
+            $filenameToStore = $filename .'_'. time() .'.'.$extension;
+            $request->file($featured_image)->storeAs('public/featured_images', $filenameToStore);
+        } else {
+            $filenameToStore = 'noimage.jpg';
+        }
+
         $food = new Food();
         $food->name = request("name");
         $food->price = request("price");
         $food->description = request("description");
         $food->toppings = request("toppings") ?? [];
         $food->user_id = Auth()->user()->id;
+        $food->featured_image = $filenameToStore;
         $food->save();
         return redirect(Route("foods.index"))->with("success", "Food created!");
     }
@@ -48,19 +63,36 @@ class FoodController extends Controller
         $this->validate($request, [
             "name" => "required",
             "price" => "required",
-            "description" => "required"
+            "description" => "required",
+            "featured_image" => "image|nullable|max:1999"
         ]);
+
+        $featured_image = 'featured_image';
+        if ($request->hasFile($featured_image)) {
+            $filenameWithExt = $request->file($featured_image)->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file($featured_image)->getClientOriginalExtension();
+            $filenameToStore = $filename .'_'. time() .'.'.$extension;
+            $request->file($featured_image)->storeAs('public/featured_images', $filenameToStore);
+        }
+
         $food = Food::findOrFail($id);
         $food->name = request("name");
         $food->price = request("price");
         $food->description = request("description");
         $food->toppings = request("toppings") ?? [];
+        if($request->hasFile($featured_image)) {
+            $food->featured_image = $filenameToStore;
+        }
         $food->save();
         return redirect(Route("foods.index"))->with("success", "Food updated!");
     }
 
     public function destroy($id) {
         $food = Food::findOrFail($id);
+        if ($food->featured_image !== 'noimage.jpg') {
+            Storage::delete("public/featured_images/".$food->featured_image);
+        }
         // staviti if svuda!
         $food->delete();
         return redirect(Route("foods.index"))->with("success", "Food: " . $food->name . " deleted succcessfully!");

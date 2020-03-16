@@ -14,6 +14,7 @@
                    @foreach($foodList as $food)
                     <p><strong>Food name: </strong><a href="{{Route('foods.show', $food->id)}}">{{$food->name}}</a></p>
                     <p><strong>Food price: </strong>${{$food->price}}</p>
+                            <img class="img my-2" style="width:200px" src="/storage/featured_images/{{$food->featured_image}}" alt="featured-image">
                      @auth
                     <div class="actions">
                         <a class="btn btn-secondary" href="{{Route('foods.edit', $food->id)}}">EDIT</a>

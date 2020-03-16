@@ -8,7 +8,7 @@
                 <div class="card-header">Edit food</div>
 
                 <div class="card-body">
-                <form action="/foods/{{$food->id}}" method="POST">
+                <form action="/foods/{{$food->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                         <input class="form-control" type="text" placeholder="Food name" name="name" value="{{$food->name}}">
@@ -21,6 +21,9 @@
                             <input type="checkbox" name="toppings[]" value="Salad" {{in_array('Salad', $food->toppings) ? 'checked' : ''}}>Salad<br/>
                             <input type="checkbox" name="toppings[]" value="Cheese" {{in_array('Cheese', $food->toppings) ? 'checked' : ''}}>Cheese<br/>
                         </fieldset>
+                    <img class="img my-2" style="width:200px" src="/storage/featured_images/{{$food->featured_image}}" alt="featured-image">
+                    <br>
+                        <input type="file" name="featured_image">
                         <button type="submit" class="btn btn-primary mt-2">Submit</button>
                     </form>
                 </div>
